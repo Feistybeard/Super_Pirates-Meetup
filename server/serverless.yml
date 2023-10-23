@@ -9,6 +9,9 @@ provider:
   iam:
     role: ${env:AWS_ROLE}
   deploymentMethod: direct
+  environment:
+    JWT_SECRET: ${env:JWT_SECRET}
+
 
 plugins:
   - serverless-webpack
@@ -23,7 +26,13 @@ functions:
     handler: functions/createUser/index.handler
     events:
       - httpApi:
-          path: /api/user
+          path: /api/user/signup
+          method: POST
+  loginUser:
+    handler: functions/loginUser/index.handler
+    events:
+      - httpApi:
+          path: /api/user/login
           method: POST
 resources:
   Resources:
