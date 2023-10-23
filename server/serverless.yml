@@ -1,0 +1,51 @@
+service: meetup-serverless
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  profile: default
+  region: eu-north-1
+  iam:
+    role: ${env:AWS_ROLE}
+  deploymentMethod: direct
+
+plugins:
+  - serverless-webpack
+
+package:
+  individually: true
+
+useDotenv: true
+
+functions:
+  createUser:
+    handler: functions/createUser/index.handler
+    events:
+      - httpApi:
+          path: /api/user
+          method: POST
+resources:
+  Resources:
+    MeetupTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: meetup
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: users
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
