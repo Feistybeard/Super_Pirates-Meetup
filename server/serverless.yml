@@ -39,6 +39,12 @@ functions:
       - httpApi:
           path: /api/meetups
           method: POST
+  addReview:
+    handler: functions/addReview/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups/reviews/{meetupId}
+          method: POST
 
 resources:
   Resources:

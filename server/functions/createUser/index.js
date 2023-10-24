@@ -23,6 +23,7 @@ async function signup(event) {
         id: nanoid(),
         username: username,
         password: hashedPwd,
+        meetups: [],
       },
     };
 
