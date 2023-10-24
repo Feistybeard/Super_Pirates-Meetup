@@ -6,6 +6,8 @@ provider:
   runtime: nodejs18.x
   profile: default
   region: eu-north-1
+  httpApi:
+    cors: true
   iam:
     role: ${env:AWS_ROLE}
   deploymentMethod: direct

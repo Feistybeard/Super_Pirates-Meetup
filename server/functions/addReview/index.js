@@ -64,7 +64,7 @@ async function lambda(event, context) {
       });
     } else {
       return sendResponse(409, {
-        success: true,
+        success: false,
         message: `Cannot leave multiple reviews on a meet-up`,
       });
     }
