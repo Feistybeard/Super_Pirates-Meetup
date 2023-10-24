@@ -2,25 +2,25 @@ import { PageLayout } from '../components/PageLayout/PageLayout';
 import { UserCredentials } from '../components/UserCredntials/UserCredentials';
 import { useState } from 'react';
 
-export const Login = () => {
+export const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleSignUp = () => {
     console.log(username, password);
-    console.log('LOg IN');
+    console.log('Sign up');
   };
 
   return (
     <PageLayout>
       <UserCredentials
-        heading={'Log In'}
-        buttonText={'Log In'}
+        heading={'Sign Up'}
+        buttonText={'Sign Up'}
         usernameValue={username}
         passwordValue={password}
         onUsernameChange={(e) => setUsername(e.target.value)}
         onPasswordChange={(e) => setPassword(e.target.value)}
-        onLogin={handleLogin}
+        onSignUp={handleSignUp}
       />
     </PageLayout>
   );
