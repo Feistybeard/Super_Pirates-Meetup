@@ -1,5 +1,11 @@
+import AddReview from './components/AddReview/AddReview.jsx';
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <AddReview />
+    </>
+  );
 }
 
 export default App;
