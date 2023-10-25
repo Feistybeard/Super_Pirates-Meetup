@@ -41,6 +41,12 @@ functions:
       - httpApi:
           path: /api/meetups
           method: POST
+  getAllMeetups:
+    handler: functions/getAllMeetups/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups
+          method: GET 
   userProfile:
     handler: functions/userProfile/index.handler
     events:
@@ -53,6 +59,12 @@ functions:
       - httpApi:
           path: /api/meetups/reviews/{meetupId}
           method: POST
+  unregisterFromMeetup:
+    handler: functions/unregisterFromMeetup/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups/{meetupId}
+          method: DELETE
 
 resources:
   Resources:
