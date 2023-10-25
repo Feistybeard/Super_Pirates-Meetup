@@ -53,6 +53,12 @@ functions:
       - httpApi:
           path: /api/meetups/reviews/{meetupId}
           method: POST
+  attendMeetup:
+    handler: functions/attendMeetup/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups/attend/{meetupId}
+          method: POST
 
 resources:
   Resources:
