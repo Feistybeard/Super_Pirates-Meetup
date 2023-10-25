@@ -41,6 +41,12 @@ functions:
       - httpApi:
           path: /api/meetups
           method: POST
+  userProfile:
+    handler: functions/userProfile/index.handler
+    events:
+      - httpApi:
+          path: /api/user/profile
+          method: GET
   addReview:
     handler: functions/addReview/index.handler
     events:
