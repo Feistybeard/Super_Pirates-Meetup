@@ -1,10 +1,10 @@
 import { PageLayout } from '../components/PageLayout/PageLayout';
 import { UserForm } from '../components/userForm/userForm';
 
-export const Login = () => {
+export const SignUp = () => {
   return (
     <PageLayout>
-      <UserForm heading={'Log In'} buttonText={'Log In'} />
+      <UserForm heading={'Sign Up'} buttonText={'Sign Up'} />
     </PageLayout>
   );
 };
