@@ -17,19 +17,11 @@ async function getMeetups() {
 async function lambda() {
   try {
     const meetups = await getMeetups();
-    const meetupInfo = meetups.map((meetup) => {
-      return {
-        time: meetup.time,
-        location: meetup.location,
-        description: meetup.description,
-        id: meetup.id,
-      }; //! Lägg till värd sen
-    });
 
     return sendResponse(200, {
       success: true,
       result: meetups.length,
-      meetups: meetupInfo,
+      meetups,
     });
   } catch (error) {
     return sendResponse(400, {
