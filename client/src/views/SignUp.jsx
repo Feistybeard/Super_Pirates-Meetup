@@ -1,5 +1,5 @@
 import { PageLayout } from '../components/PageLayout/PageLayout';
-import { UserForm } from '../components/userForm/userForm';
+import { UserForm } from '../components/UserForm/UserForm';
 
 export const SignUp = () => {
   return (
