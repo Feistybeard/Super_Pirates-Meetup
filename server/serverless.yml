@@ -6,6 +6,8 @@ provider:
   runtime: nodejs18.x
   profile: default
   region: eu-north-1
+  httpApi:
+    cors: true
   iam:
     role: ${env:AWS_ROLE}
   deploymentMethod: direct
@@ -41,6 +43,18 @@ functions:
     events:
       - httpApi:
           path: /api/meetups
+          method: POST
+  userProfile:
+    handler: functions/userProfile/index.handler
+    events:
+      - httpApi:
+          path: /api/user/profile
+          method: GET
+  addReview:
+    handler: functions/addReview/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups/reviews/{meetupId}
           method: POST
 
 resources:
