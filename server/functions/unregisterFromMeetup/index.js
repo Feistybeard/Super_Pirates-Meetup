@@ -27,6 +27,7 @@ async function unregisterFromMeetup(event) {
       return sendError(400, {
         success: false,
         message: 'User is not in the attendees list',
+        attendees: meetup.Item.attendees,
       });
     }
 
@@ -47,6 +48,9 @@ async function unregisterFromMeetup(event) {
       success: true,
       message: 'User successfully unregistred from event',
       meetup: meetup,
+      limit: meetup.Item.limit,
+      numberOfAttendees: meetup.Item.attendees.length,
+      spotsAvailable: meetup.Item.limit - meetup.Item.attendees.length,
     });
   } catch (error) {
     console.log(error);
