@@ -1,8 +1,6 @@
-const awsLink = 'https://khbmhn1wfe.execute-api.eu-north-1.amazonaws.com/api';
-
 export async function submitToApi(data, method, link) {
   try {
-    const response = await fetch(awsLink + link, {
+    const response = await fetch(import.meta.env.VITE_BASE_URL + link, {
       method: method,
       headers: {
         'Content-Type': 'application/json',
