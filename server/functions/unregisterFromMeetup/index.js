@@ -37,9 +37,11 @@ async function unregisterFromMeetup(event) {
       .update({
         TableName: 'meetup',
         Key: { id: meetupId },
-        UpdateExpression: 'SET attendees = :attendees',
+        UpdateExpression: 'SET attendees = :attendees, spotsAvailable = :spotsAvailable, numberOfAttendees = :numberOfAttendees',
         ExpressionAttributeValues: {
           ':attendees': meetup.Item.attendees,
+          ':spotsAvailable': meetup.Item.limit - meetup.Item.attendees.length,
+          ':numberOfAttendees': meetup.Item.attendees.length,
         },
       })
       .promise();
@@ -47,7 +49,6 @@ async function unregisterFromMeetup(event) {
     return sendResponse(200, {
       success: true,
       message: 'User successfully unregistred from event',
-      meetup: meetup,
       limit: meetup.Item.limit,
       numberOfAttendees: meetup.Item.attendees.length,
       spotsAvailable: meetup.Item.limit - meetup.Item.attendees.length,
