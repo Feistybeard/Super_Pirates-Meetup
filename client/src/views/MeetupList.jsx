@@ -4,6 +4,7 @@ import Meetup from '../components/Meetup/Meetup';
 
 function MeetupList() {
   const [meetups, setMeetups] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
       const data = await getMeetups();
@@ -13,17 +14,13 @@ function MeetupList() {
   }, []);
 
   return (
-    <ul className='card w-64 bg-base-100 shadow-xl'>
-      {meetups.map((meetup) => (
-        <Meetup
-          key={meetup.id}
-          id={meetup.id}
-          time={meetup.time}
-          location={meetup.location}
-          description={meetup.description}
-        />
-      ))}
-    </ul>
+    <div className='flex justify-center'>
+      <ul className='grid grid-cols-4 gap-4 bg-base-100 shadow-xl '>
+        {meetups.map((meetup) => (
+          <Meetup key={meetup.id} meetup={meetup} />
+        ))}
+      </ul>
+    </div>
   );
 }
 
