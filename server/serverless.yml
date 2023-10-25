@@ -13,9 +13,6 @@ provider:
   deploymentMethod: direct
   environment:
     JWT_SECRET: ${env:JWT_SECRET}
-  httpApi:
-    cors: true
-
 
 plugins:
   - serverless-webpack
