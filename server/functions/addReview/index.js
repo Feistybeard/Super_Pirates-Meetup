@@ -19,7 +19,7 @@ async function lambda(event, context) {
     const meetups = await getUsersMeetupsByUserId(userId);
     const [meetup] = meetups.filter((meetup) => meetup.id === meetupId);
 
-    if (!hasUserParticipated(meetups, meetupId)) {
+    if (!meetup) {
       return sendResponse(400, {
         success: false,
         message: `Cannot leave a review on a meet-up that the user didn't attend`,
