@@ -1,5 +1,11 @@
+import MeetupList from './views/MeetupList';
+
 function App() {
-  return <></>;
+  return (
+    <div>
+      <MeetupList />
+    </div>
+  );
 }
 
 export default App;

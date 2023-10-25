@@ -18,7 +18,12 @@ async function lambda() {
   try {
     const meetups = await getMeetups();
     const meetupInfo = meetups.map((meetup) => {
-      return { time: meetup.time, location: meetup.location, description: meetup.description }; //! Lägg till värd sen
+      return {
+        time: meetup.time,
+        location: meetup.location,
+        description: meetup.description,
+        id: meetup.id,
+      }; //! Lägg till värd sen
     });
 
     return sendResponse(200, {
