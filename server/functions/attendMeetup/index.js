@@ -50,8 +50,8 @@ async function lambda(event, context) {
           ExpressionAttributeValues: {
             ':item': [userId],
             ':empty': [],
-            ':spotsAvailable': meetup.limit - meetup.attendees.length - 1,
-            ':numberOfAttendees': meetup.attendees.length + 1,
+            ':spotsAvailable': meetup.spotsAvailable - 1,
+            ':numberOfAttendees': meetup.numberOfAttendees + 1,
           },
         })
         .promise();
