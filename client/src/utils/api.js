@@ -2,7 +2,7 @@ const URL = `${import.meta.env.VITE_BASE_URL}`;
 
 export async function getMeetups() {
   try {
-    const response = await fetch(URL, {
+    const response = await fetch(URL + 'meetups', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

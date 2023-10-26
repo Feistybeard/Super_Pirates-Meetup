@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { baseLink } from '../../utils/helpers';
@@ -8,8 +8,16 @@ import { useLocation } from 'react-router-dom';
 export const UserForm = ({ heading, buttonText }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  let navigate = useNavigate();
+
+  const userToken = localStorage.getItem('token');
+  const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    if (userToken) {
+      navigate(`${baseLink}/user/profile`);
+    }
+  }, [navigate, userToken]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,13 +25,16 @@ export const UserForm = ({ heading, buttonText }) => {
     const method = 'POST';
     let link;
     let message;
+    let redirect;
 
     if (location.pathname === `${baseLink}/login`) {
       link = 'user/login';
       message = 'Login';
+      redirect = `${baseLink}/meetups`
     } else if (location.pathname === `${baseLink}/signup`) {
       link = 'user/signup';
       message = 'Signup';
+      redirect = `${baseLink}/login`
     }
 
     const response = await submitToApi(data, method, link);
@@ -33,7 +44,8 @@ export const UserForm = ({ heading, buttonText }) => {
       setUsername('');
       setPassword('');
       alert(message + ' successful!');
-      navigate(`${baseLink}/`); // back to Home
+      navigate(redirect);
+      window.location.reload();
     } else {
       console.log(message + ' failed');
       alert(`Error: ${response.message}`);

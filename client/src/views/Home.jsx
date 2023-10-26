@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { baseLink } from '../utils/helpers';
 
 export const Home = () => {
+  const userToken = localStorage.getItem('token');
+
   return (
     <PageLayout>
       <div className='max-w-md'>
@@ -12,14 +14,16 @@ export const Home = () => {
           Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
           exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
         </p>
-        <div className='flex flex-row justify-center p-4 gap-4'>
-          <Link to={`${baseLink}/login`}>
-            <Button buttonText='Log In' />
-          </Link>
-          <Link to={`${baseLink}/signup`}>
-            <Button buttonText='Sign Up' />
-          </Link>
-        </div>
+        {!userToken && (
+          <div className='flex flex-row justify-center p-4 gap-4'>
+            <Link to={`${baseLink}/login`}>
+              <Button buttonText='Log In' />
+            </Link>
+            <Link to={`${baseLink}/signup`}>
+              <Button buttonText='Sign Up' />
+            </Link>
+          </div>
+        )}
       </div>
     </PageLayout>
   );

@@ -2,8 +2,23 @@
 import { Link } from 'react-router-dom';
 import { baseLink } from '../../utils/helpers';
 import { NavbarLinks } from './NavbarLinks';
+import { Button } from '../Button/Button';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  const userToken = localStorage.getItem('token');
+
+  const handleClick = () => {
+    navigate(`${baseLink}/user/profile`);
+  };
+
+  useEffect(() => {
+    setIsLoggedIn(!!userToken);
+  }, [userToken]);
+
   return (
     <div className='navbar bg-base-100 fixed top-0 left-0'>
       <div className='navbar-start'>
@@ -39,7 +54,7 @@ export const Navbar = () => {
         <NavbarLinks navStyle={'menu menu-horizontal px-1'} />
       </div>
       <div className='navbar-end'>
-        <a className='btn'>Button</a>
+        {isLoggedIn && <Button buttonText='Profile' onClick={handleClick} />}
       </div>
     </div>
   );
