@@ -6,7 +6,7 @@ import MeetupIcon from '../MeetupIcon/MeetupIcon';
 import meetupImg from '/59904.jpg';
 import { AiOutlineClockCircle, AiOutlineUser, AiOutlineCheckSquare } from 'react-icons/ai';
 import { IoLocationOutline } from 'react-icons/io5';
-import { BsHash } from 'react-icons/Bs';
+import { BsHash } from 'react-icons/bs';
 
 function Meetup({ meetup }) {
   const [showMeetup, setShowMeetup] = useState(false);

@@ -18,6 +18,24 @@ export async function getMeetups() {
   }
 }
 
+export async function getSearchResult(search) {
+  try {
+    const response = await fetch(`${URL}/search?query=${search}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      return result;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function submitReview(data, meetupId) {
   const token =
     /* temporär */
