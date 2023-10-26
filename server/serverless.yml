@@ -41,12 +41,6 @@ functions:
       - httpApi:
           path: /api/meetups
           method: POST
-  getAllMeetups:
-    handler: functions/getAllMeetups/index.handler
-    events:
-      - httpApi:
-          path: /api/meetups
-          method: GET 
   userProfile:
     handler: functions/userProfile/index.handler
     events:
