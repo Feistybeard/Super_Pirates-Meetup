@@ -71,12 +71,6 @@ functions:
       - httpApi:
           path: /api/meetups
           method: GET
-  searchMeetups:
-    handler: functions/searchMeetups/index.handler
-    events:
-      - httpApi:
-          path: /api/meetups/search
-          method: GET
   unregisterFromMeetup:
     handler: functions/unregisterFromMeetup/index.handler
     events:
