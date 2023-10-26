@@ -19,6 +19,8 @@ async function lambda(event, context) {
           ...meetup,
           attendees: [],
           reviews: [],
+          spotsAvailable: meetup.limit,
+          numberOfAttendees: 0,
         },
       })
       .promise();
@@ -28,9 +30,10 @@ async function lambda(event, context) {
       message: 'Meetup successfully created',
     });
   } catch (error) {
+    console.log(error)
     return sendResponse(400, {
       success: false,
-      message: 'Failed to create meetup',
+      message: 'Failed to create meetup'
     });
   }
 }
