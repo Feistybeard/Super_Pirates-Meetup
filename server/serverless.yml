@@ -71,6 +71,12 @@ functions:
       - httpApi:
           path: /api/meetups
           method: GET
+  unregisterFromMeetup:
+    handler: functions/unregisterFromMeetup/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups/{meetupId}
+          method: DELETE
 
 resources:
   Resources:
