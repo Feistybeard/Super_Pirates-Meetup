@@ -32,7 +32,7 @@ async function lambda(event, context) {
 
     const userSignedUp = meetup.attendees.includes(userId);
 
-    if (meetup.attendees.length >= meetup.limit) {
+    if (!meetup.spotsAvailable) {
       return sendResponse(400, {
         success: false,
         message: `The number of attendees cannot exceed the limit: ${meetup.limit}`,
@@ -45,11 +45,13 @@ async function lambda(event, context) {
           TableName: 'meetup',
           Key: { id: meetupId },
           UpdateExpression:
-            'SET #attendees = list_append(if_not_exists(#attendees, :empty), :item)',
+            'SET #attendees = list_append(if_not_exists(#attendees, :empty), :item), spotsAvailable = :spotsAvailable, numberOfAttendees = :numberOfAttendees',
           ExpressionAttributeNames: { '#attendees': 'attendees' },
           ExpressionAttributeValues: {
             ':item': [userId],
             ':empty': [],
+            ':spotsAvailable': meetup.spotsAvailable - 1,
+            ':numberOfAttendees': meetup.numberOfAttendees + 1,
           },
         })
         .promise();
