@@ -2,7 +2,7 @@ import middy from '@middy/core';
 import { db } from '../../services/db.js';
 import { sendResponse } from '../../responses';
 
-async function getMeetups() {
+export async function getMeetups() {
   try {
     const params = {
       TableName: 'meetup',
