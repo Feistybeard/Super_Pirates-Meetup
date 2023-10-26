@@ -32,6 +32,13 @@ async function lambda(event, context) {
 
     const userSignedUp = meetup.attendees.includes(userId);
 
+    if (meetup.attendees.length >= meetup.limit) {
+      return sendResponse(400, {
+        success: false,
+        message: `The number of attendees cannot exceed the limit: ${meetup.limit}`,
+      });
+    }
+
     if (!userSignedUp) {
       await db
         .update({
