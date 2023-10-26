@@ -19,10 +19,10 @@ export const UserForm = ({ heading, buttonText }) => {
     let message;
 
     if (location.pathname === `${baseLink}/login`) {
-      link = 'api/user/login';
+      link = 'user/login';
       message = 'Login';
     } else if (location.pathname === `${baseLink}/signup`) {
-      link = 'api/user/signup';
+      link = 'user/signup';
       message = 'Signup';
     }
 
