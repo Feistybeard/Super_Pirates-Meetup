@@ -35,7 +35,7 @@ function MeetupList() {
 
   async function handleClick() {
     if (search === '' || search.length < 2) return;
-    const query = await getMeetupsByQuery(search);
+    const query = getMeetupsByQuery(search);
     setSearchResult(query);
     setSearch('');
   }
