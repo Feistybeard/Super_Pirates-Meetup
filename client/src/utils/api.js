@@ -1,12 +1,9 @@
 export async function getMeetups() {
-  const token = localStorage.getItem('token');
-
   try {
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/meetups`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -20,13 +17,11 @@ export async function getMeetups() {
 }
 
 export async function getMeetup(id) {
-  const token = localStorage.getItem('token');
   try {
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/meetups/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
     });
 
