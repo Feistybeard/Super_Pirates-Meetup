@@ -3,6 +3,7 @@ export const baseLink = '/Super_Pirates-Meetup';
 
 export const siteLinks = [
   { title: 'Home', url: `${baseLink}/` },
+  { title: 'Meetups', url: `${baseLink}/meetups` },
   { title: 'Sign Up', url: `${baseLink}/signup` },
   { title: 'Log In', url: `${baseLink}/login` },
   { title: 'Profile', url: `${baseLink}/profile` },

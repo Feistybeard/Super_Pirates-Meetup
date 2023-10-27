@@ -1,6 +1,6 @@
 export async function getMeetups() {
   try {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/meetups`, {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}meetups`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -18,7 +18,8 @@ export async function getMeetups() {
 
 export async function getMeetup(id) {
   try {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/meetups/${id}`, {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}meetups/${id}`, {
+
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

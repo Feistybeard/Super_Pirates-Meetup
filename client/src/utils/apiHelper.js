@@ -10,6 +10,12 @@ export async function submitToApi(data, method, link) {
 
     const result = await response.json();
     console.log('RESULT:', result);
+
+    if (link == 'user/login') {
+      console.log('token', result.token);
+      localStorage.setItem('token', JSON.stringify(result.token));
+    }
+
     return result;
   } catch (error) {
     console.log(error);
