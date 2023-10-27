@@ -1,4 +1,3 @@
-import { attendMeetup } from '../../utils/api';
 import MeetupCard from './MeetupCard';
 import MeetupInformation from './MeetupInformation';
 
@@ -14,7 +13,8 @@ function MeetupCardLayout({
   keywords,
 }) {
   async function handleClick() {
-    await attendMeetup(id);
+    // Send request to attend meetup
+    console.log(id);
   }
 
   return (
