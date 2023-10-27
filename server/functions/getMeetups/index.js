@@ -1,6 +1,7 @@
 import middy from '@middy/core';
 import { db } from '../../services/db.js';
 import { sendResponse } from '../../responses';
+import { authorize } from '../../middleware/index.js';
 
 async function getMeetups() {
   try {
@@ -30,4 +31,4 @@ async function lambda() {
   }
 }
 
-export const handler = middy(lambda);
+export const handler = middy(lambda).use(authorize());
