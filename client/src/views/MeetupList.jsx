@@ -3,6 +3,9 @@ import { getMeetups } from '../utils/api';
 import Meetup from '../components/Meetup/Meetup';
 import SearchInput from '../components/SearchInput/SearchInput';
 import { PageLayout } from '../components/PageLayout/PageLayout';
+import { Link } from 'react-router-dom';
+import MeetupIcon from '../components/MeetupIcon/MeetupIcon';
+import { IoMdArrowBack } from 'react-icons/io';
 
 function MeetupList() {
   const [meetups, setMeetups] = useState([]);
@@ -37,7 +40,6 @@ function MeetupList() {
   }
 
   async function handleClick() {
-    if (search === '' || search.length < 2) return;
     const query = getMeetupsByQuery(search);
     setSearchResult(query);
     setSearch('');
@@ -59,11 +61,23 @@ function MeetupList() {
 
   return (
     <PageLayout>
-      <div className='flex flex-col gap-5 justify-center items-center pt-10 z-10000000000'>
-        <SearchInput onChange={handleOnChange} value={search} onClick={handleClick} />
+      <div className='flex flex-col gap-5 justify-center items-center mt-20'>
+        <SearchInput
+          disabled={search === '' || search.length < 2}
+          onChange={handleOnChange}
+          value={search}
+          onClick={handleClick}
+        />
 
         {!searchResult.length ? (
-          <p>No results found...</p>
+          <div className='flex flex-col items-center gap-3'>
+            <p>No results found...</p>
+            <MeetupIcon icon={<IoMdArrowBack />}>
+              <Link className='link link-primary>' to='.' onClick={() => setSearchResult(meetups)}>
+                Go back
+              </Link>
+            </MeetupIcon>
+          </div>
         ) : (
           <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-base-100 shadow-xl'>
             {searchResult.map((meetup) => (

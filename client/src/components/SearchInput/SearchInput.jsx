@@ -1,11 +1,11 @@
-function SearchInput({ onChange, onClick, value }) {
+function SearchInput({ disabled, onChange, onClick, value }) {
   return (
     <div className='join justify-center'>
       <div>
         <div>
           <input
-            className='input input-bordered join-item'
-            placeholder='Search'
+            className='input input-bordered join-item '
+            placeholder='Search...'
             onChange={onChange}
             value={value}
           />
@@ -16,7 +16,7 @@ function SearchInput({ onChange, onClick, value }) {
         <option>Keyword</option>
       </select>
       <div className='indicator'>
-        <button className='btn join-item' onClick={onClick}>
+        <button disabled={disabled} className='btn join-item' onClick={onClick}>
           Search
         </button>
       </div>

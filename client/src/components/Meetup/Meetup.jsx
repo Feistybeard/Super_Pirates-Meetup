@@ -9,7 +9,7 @@ function Meetup({ location, host, id, time }) {
   const { pathname } = useLocation();
 
   function handleClick() {
-    navigate(`${pathname}/${id}`); // => <MeetupItem/>
+    navigate(`${pathname}/${id}`); // =>  <MeetupItem/>
   }
 
   return (
@@ -19,15 +19,15 @@ function Meetup({ location, host, id, time }) {
       </figure>
 
       <MeetupIcon icon={<AiOutlineClockCircle />}>
-        <p>{time}</p>
+        <h3>{time}</h3>
       </MeetupIcon>
       <MeetupIcon icon={<IoLocationOutline />}>
-        <p>{location}</p>
+        <h3>{location}</h3>
       </MeetupIcon>
       <MeetupIcon icon={<AiOutlineUser />}>
-        <p>
+        <h3>
           Event by <strong>{host}</strong>
-        </p>
+        </h3>
       </MeetupIcon>
 
       <div className='card-actions'>
