@@ -6,7 +6,6 @@ export const siteLinks = [
   { title: 'Meetups', url: `${baseLink}/meetups` },
   { title: 'Sign Up', url: `${baseLink}/signup` },
   { title: 'Log In', url: `${baseLink}/login` },
-  { title: 'Profile', url: `${baseLink}/profile` },
 ];
 
 export function generateHashtag(str) {
