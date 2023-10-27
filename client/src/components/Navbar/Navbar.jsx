@@ -12,7 +12,7 @@ export const Navbar = () => {
   const userToken = localStorage.getItem('token');
 
   const handleClick = () => {
-    navigate(`${baseLink}/user/profile`);
+    navigate(`${baseLink}/profile`);
   };
 
   useEffect(() => {

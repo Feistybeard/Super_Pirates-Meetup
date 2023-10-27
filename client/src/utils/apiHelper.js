@@ -13,7 +13,7 @@ export async function submitToApi(data, method, link) {
 
     if (link == 'user/login') {
       console.log('token', result.token);
-      localStorage.setItem('token', JSON.stringify(result.token));
+      localStorage.setItem('token', result.token);
     }
 
     return result;

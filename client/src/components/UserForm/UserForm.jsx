@@ -15,7 +15,7 @@ export const UserForm = ({ heading, buttonText }) => {
 
   useEffect(() => {
     if (userToken) {
-      navigate(`${baseLink}/user/profile`);
+      navigate(`${baseLink}/profile`);
     }
   }, [navigate, userToken]);
 
@@ -30,11 +30,11 @@ export const UserForm = ({ heading, buttonText }) => {
     if (location.pathname === `${baseLink}/login`) {
       link = 'user/login';
       message = 'Login';
-      redirect = `${baseLink}/meetups`
+      redirect = `${baseLink}/meetups`;
     } else if (location.pathname === `${baseLink}/signup`) {
       link = 'user/signup';
       message = 'Signup';
-      redirect = `${baseLink}/login`
+      redirect = `${baseLink}/login`;
     }
 
     const response = await submitToApi(data, method, link);

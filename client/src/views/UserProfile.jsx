@@ -16,7 +16,7 @@ export const UserProfile = () => {
   const fetchMeetups = async () => {
     setLoading(true);
     const token = localStorage.getItem('token');
-    const url = import.meta.env.VITE_BASE_URL + '/user/profile';
+    const url = import.meta.env.VITE_BASE_URL + 'user/profile';
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -25,7 +25,7 @@ export const UserProfile = () => {
       },
     });
     const data = await response.json();
-
+    console.log(data);
     setUsername(data.username);
     setLoading(false);
 
