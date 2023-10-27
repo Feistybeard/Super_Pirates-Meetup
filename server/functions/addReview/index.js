@@ -8,7 +8,7 @@ import { sendResponse } from '../../responses';
 import { authorize, validateSchema } from '../../middleware/index.js';
 import { addReviewSchema } from '../../validations/index.js';
 
-import { getUsersMeetupsByUserId, hasUserParticipated, getReviewsByMeetupId } from './helpers.js';
+import { getUsersMeetupsByUserId, getReviewsByMeetupId } from './helpers.js';
 
 async function lambda(event, context) {
   try {

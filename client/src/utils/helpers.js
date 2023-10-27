@@ -7,3 +7,15 @@ export const siteLinks = [
   { title: 'Log In', url: `${baseLink}/login` },
   { title: 'Profile', url: `${baseLink}/profile` },
 ];
+
+export function generateHashtag(str) {
+  const hashtag = str.split(' ').reduce((tag, word) => {
+    if (word.length > 0) {
+      return tag + word[0].toUpperCase() + word.slice(1);
+    } else {
+      return tag;
+    }
+  }, '#');
+
+  return hashtag.length === 1 ? false : hashtag;
+}
