@@ -1,6 +1,5 @@
 import { sendResponse, sendError } from '../../responses';
 import middy from '@middy/core';
-import jsonBodyParser from '@middy/http-json-body-parser';
 import { db } from '../../services/db.js';
 import { authorize } from '../../middleware/index.js';
 
@@ -24,10 +23,20 @@ async function getUserMeetups(event, context) {
       })
       .promise();
 
+    const username = await db
+      .get({
+        TableName: 'users',
+        Key: {
+          id: userId,
+        },
+      })
+      .promise();
+
     return sendResponse(201, {
       success: true,
       message: 'Fetched user meetups successfully',
       data: meetups.Items,
+      username: username.Item.username,
     });
   } catch (error) {
     return sendError(500, {
