@@ -13,7 +13,7 @@ function Meetup({ location, host, id, time }) {
   }
 
   return (
-    <li className='card-body w-80'>
+    <li className='card-body w-80 '>
       <figure>
         <img src={meetupImg} alt='' />
       </figure>

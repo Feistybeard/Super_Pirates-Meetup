@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { getMeetup } from '../utils/api';
 import { useEffect, useState } from 'react';
 import MeetupCardLayout from '../components/MeetupCardLayout/MeetupCardLayout';
+import { PageLayout } from '../components/PageLayout/PageLayout';
 
 function MeetupItem() {
   const [meetup, setMeetup] = useState([]);
@@ -16,7 +17,7 @@ function MeetupItem() {
   }, [id]);
 
   return (
-    <div className='flex justify-center items-center'>
+    <PageLayout>
       <MeetupCardLayout
         attendees={meetup.attendees}
         limit={meetup.limit}
@@ -28,7 +29,7 @@ function MeetupItem() {
         id={meetup.id}
         keywords={meetup.keywords}
       />
-    </div>
+    </PageLayout>
   );
 }
 
