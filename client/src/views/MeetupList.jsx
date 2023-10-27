@@ -21,18 +21,15 @@ function MeetupList() {
     return findMatch;
   }
 
-
   useEffect(() => {
     async function fetchData() {
       const data = await getMeetups();
       setMeetups(data.meetups);
       setIsLoading(false);
       setSearchResult(data.meetups);
-
     }
     fetchData();
   }, []);
-
 
   if (isLoading) return <p className='flex justify-center items-center h-screen'>Loading...</p>;
 
@@ -52,6 +49,8 @@ function MeetupList() {
           />
         ))}
       </ul>
+    </div>
+  );
 
   function handleOnChange(e) {
     setSearch(e.target.value);
