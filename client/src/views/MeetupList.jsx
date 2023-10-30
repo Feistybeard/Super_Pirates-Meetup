@@ -15,13 +15,17 @@ function MeetupList() {
 
   function getMeetupsByQuery(queryStr) {
     const words = queryStr.toLowerCase().split(' ');
+
     const findMatch = meetups.filter((meetup) => {
+      const keywords = meetup.keywords.map((keyword) => keyword.toLowerCase());
+
       for (const word of words) {
-        if (meetup.keywords.includes(word)) {
+        if (keywords.includes(word)) {
           return meetup;
         }
       }
     });
+
     return findMatch;
   }
 
