@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { submitReview } from '../../utils/api.js';
-import Notification from '../Notification/Notification.jsx';
+import { submitReview } from '../../../utils/api.js';
+import Notification from '../../Notification/Notification.jsx';
 import Score from './Score/Score.jsx';
 
-export default function AddReview({ meetupId }) {
+export default function AddReview({ meetupId, onSubmit }) {
   const [data, setData] = useState({ comment: '', score: 0 });
   const [notification, setNotification] = useState('');
 
-  const onSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const result = await submitReview(data, meetupId);
@@ -15,6 +15,7 @@ export default function AddReview({ meetupId }) {
     if (result.success) {
       setData({ comment: '', score: 0 });
       setNotification('');
+      onSubmit();
     } else {
       setNotification(result.message);
     }
@@ -31,7 +32,7 @@ export default function AddReview({ meetupId }) {
 
   return (
     <article className='card  m-x-0 p-x-0'>
-      <form className='card-body pt-4 px-0' onSubmit={onSubmit}>
+      <form className='card-body pt-4 px-0' onSubmit={handleSubmit}>
         <textarea
           className='textarea textarea-bordered resize-none w-full max-w-full'
           placeholder='Comment here...'
