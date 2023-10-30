@@ -19,7 +19,6 @@ export async function getMeetups() {
 export async function getMeetup(id) {
   try {
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}meetups/${id}`, {
-
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -36,9 +35,7 @@ export async function getMeetup(id) {
 }
 
 export async function submitReview(data, meetupId) {
-  const token =
-    /* temporär */
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlIwdXljY0YzRkhmb19qRkdIS3ZFTSIsImlhdCI6MTY5ODE0OTY2MywiZXhwIjoxNjk4MTUzMjYzfQ.SbZt1L-tm8hGNSyajXF7qQNe8HSKxFwKMpLHF8MpBDY';
+  const token = localStorage.getItem('token');
 
   try {
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}meetups/reviews/${meetupId}`, {
@@ -52,6 +49,25 @@ export async function submitReview(data, meetupId) {
 
     const result = await response.json();
     return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getUserInfo() {
+  const token = localStorage.getItem('token');
+  const url = import.meta.env.VITE_BASE_URL + 'user/profile';
+
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return await response.json();
   } catch (error) {
     console.log(error);
   }

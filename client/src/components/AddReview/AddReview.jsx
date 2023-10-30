@@ -30,9 +30,8 @@ export default function AddReview({ meetupId }) {
   };
 
   return (
-    <article className='card'>
-      <form className='card-body' onSubmit={onSubmit}>
-        <h2 className='card-title'>Leave a review</h2>
+    <article className='card  m-x-0 p-x-0'>
+      <form className='card-body pt-4 px-0' onSubmit={onSubmit}>
         <textarea
           className='textarea textarea-bordered resize-none w-full max-w-full'
           placeholder='Comment here...'
