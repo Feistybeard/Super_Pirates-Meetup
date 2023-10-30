@@ -20,8 +20,10 @@ function MeetupList() {
       const keywords = meetup.keywords.map((keyword) => keyword.toLowerCase());
 
       for (const word of words) {
-        if (keywords.includes(word)) {
-          return meetup;
+        for (const key of keywords) {
+          if (key.includes(word)) {
+            return meetup;
+          }
         }
       }
     });
