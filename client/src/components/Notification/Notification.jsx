@@ -8,8 +8,8 @@ export default function Notification({ message, onExit, timer = 3000 }) {
       setVisible(true);
 
       setTimeout(() => {
-        onExit();
         setVisible(false);
+        onExit();
       }, timer);
     }
   }, [message]);

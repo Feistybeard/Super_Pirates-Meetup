@@ -4,20 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { baseLink } from '../../utils/helpers';
 import { submitToApi } from '../../utils/apiHelper';
 import { useLocation } from 'react-router-dom';
+import Notification from '../Notification/Notification.jsx';
 
 export const UserForm = ({ heading, buttonText }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [notification, setNotification] = useState('');
+
+  const timer = 3000;
 
   const userToken = localStorage.getItem('token');
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    if (userToken) {
-      navigate(`${baseLink}/profile`);
-    }
-  }, [navigate, userToken]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,33 +41,38 @@ export const UserForm = ({ heading, buttonText }) => {
       console.log(message + ' successful');
       setUsername('');
       setPassword('');
-      alert(message + ' successful!');
-      navigate(redirect);
-      window.location.reload();
+      setNotification(message + ' successful!');
+      setTimeout(() => {
+        navigate(redirect);
+        window.location.reload();
+      }, timer);
     } else {
       console.log(message + ' failed');
-      alert(`Error: ${response.message}`);
+      setNotification(`Error: ${response.message}`);
     }
   };
 
   return (
-    <form className='flex flex-col w-64 mx-auto p-4 gap-4 h-full' onSubmit={handleSubmit}>
-      <h1 className='text-2xl'>{heading}</h1>
-      <input
-        type='text'
-        placeholder='username'
-        className='input input-bordered input-primary w-full max-w-xs'
-        onChange={(e) => setUsername(e.target.value)}
-        value={username}
-      />
-      <input
-        type='password'
-        placeholder='password'
-        className='input input-bordered input-primary w-full max-w-xs'
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
-      <Button buttonText={buttonText} />
-    </form>
+    <>
+      <form className='flex flex-col w-64 mx-auto p-4 gap-4 h-full' onSubmit={handleSubmit}>
+        <h1 className='text-2xl'>{heading}</h1>
+        <input
+          type='text'
+          placeholder='username'
+          className='input input-bordered input-primary w-full max-w-xs'
+          onChange={(e) => setUsername(e.target.value)}
+          value={username}
+        />
+        <input
+          type='password'
+          placeholder='password'
+          className='input input-bordered input-primary w-full max-w-xs'
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
+        <Button buttonText={buttonText} disabled={!!notification} />
+      </form>
+      <Notification message={notification} onExit={() => setNotification('')} timer={timer} />
+    </>
   );
 };
