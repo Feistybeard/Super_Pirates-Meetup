@@ -4,15 +4,15 @@ import { db } from '../../services/db.js';
 import { authorize } from '../../middleware/index.js';
 
 async function getUserMeetups(event, context) {
-  if (!event.auth) {
-    return sendResponse(401, {
-      success: false,
-      message: 'Unauthorized user',
-    });
-  }
-  const userId = event.auth.id;
-
   try {
+    if (!event.auth) {
+      return sendResponse(401, {
+        success: false,
+        message: 'Unauthorized user',
+      });
+    }
+
+    const userId = event.auth.id;
     const meetups = await db
       .scan({
         TableName: 'meetup',
@@ -37,6 +37,7 @@ async function getUserMeetups(event, context) {
       message: 'Fetched user meetups successfully',
       data: meetups.Items,
       username: username.Item.username,
+      userId: userId,
     });
   } catch (error) {
     return sendError(500, {

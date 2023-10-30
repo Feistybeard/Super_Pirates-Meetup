@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode';
 // base link from vite.config.js
 export const baseLink = '/Super_Pirates-Meetup';
 
@@ -18,4 +19,20 @@ export function generateHashtag(str) {
   }, '#');
 
   return hashtag.length === 1 ? false : hashtag;
+}
+
+export function isTokenExpired() {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    return true;
+  }
+
+  const decodedToken = jwtDecode(token);
+  const isExpired = decodedToken.exp < Date.now() / 1000;
+  if (isExpired) {
+    localStorage.removeItem('token');
+  }
+
+  return isExpired;
 }

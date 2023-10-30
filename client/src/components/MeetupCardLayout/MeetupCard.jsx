@@ -4,7 +4,7 @@ import { PiSubtitlesThin } from 'react-icons/pi';
 import { AiFillStar, AiOutlineUser } from 'react-icons/ai';
 import meetupImg from '/59904.jpg';
 
-function MeetupCard({ time, title, host, onClick }) {
+function MeetupCard({ time, title, host, onClick, btnActive, btnText, btnColor }) {
   return (
     <div className='card w-15 sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-base-100 shadow-xl image-full'>
       <figure>
@@ -23,9 +23,14 @@ function MeetupCard({ time, title, host, onClick }) {
           <h2 className='card-title'>{host}</h2>
         </MeetupIcon>
         <div className='card-actions justify-end mt-auto'>
-          <button className='btn btn-secondary' onClick={onClick}>
+          <button
+            className={`btn ${btnColor === 'leave' ? 'btn-error' : 'btn-primary'} ${
+              !btnActive ? 'btn-disabled' : ''
+            }`}
+            onClick={onClick}
+          >
             <AiFillStar fill='yellow' />
-            sign me up
+            {btnText}
           </button>
         </div>
       </div>
