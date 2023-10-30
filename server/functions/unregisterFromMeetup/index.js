@@ -37,7 +37,8 @@ async function unregisterFromMeetup(event) {
       .update({
         TableName: 'meetup',
         Key: { id: meetupId },
-        UpdateExpression: 'SET attendees = :attendees, spotsAvailable = :spotsAvailable, numberOfAttendees = :numberOfAttendees',
+        UpdateExpression:
+          'SET attendees = :attendees, spotsAvailable = :spotsAvailable, numberOfAttendees = :numberOfAttendees',
         ExpressionAttributeValues: {
           ':attendees': meetup.Item.attendees,
           ':spotsAvailable': meetup.Item.limit - meetup.Item.attendees.length,
@@ -59,4 +60,4 @@ async function unregisterFromMeetup(event) {
   }
 }
 
-export const handler = middy(unregisterFromMeetup).use(jsonBodyParser()).use(authorize());
+export const handler = middy(unregisterFromMeetup).use(authorize());

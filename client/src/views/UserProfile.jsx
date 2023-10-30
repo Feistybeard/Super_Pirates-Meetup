@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '../components/Button/Button';
-import { Link } from 'react-router-dom';
-import { baseLink } from '../utils/helpers';
+import { Link, useNavigate } from 'react-router-dom';
+import { baseLink, isTokenExpired } from '../utils/helpers';
 import { PageLayout } from '../components/PageLayout/PageLayout';
 import { LoadingSpinner } from '../components/LoadingSpinner/LoadingSpinner';
 import dayjs from 'dayjs';
@@ -12,30 +12,30 @@ export const UserProfile = () => {
   const [loading, setLoading] = useState(false);
   const pastMeetups = [];
   const futureMeetups = [];
+  const navigate = useNavigate();
 
   const fetchMeetups = async () => {
     setLoading(true);
-    const token = localStorage.getItem('token');
-    const url = import.meta.env.VITE_BASE_URL + 'user/profile';
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    console.log(data);
-    setUsername(data.username);
-    setLoading(false);
+    const tokenExpired = isTokenExpired();
+    if (tokenExpired) {
+      navigate(`${baseLink}/login`);
+    } else {
+      const url = import.meta.env.VITE_BASE_URL + 'user/profile';
+      const token = localStorage.getItem('token');
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
 
-    return setMeetups(data.data);
+      setUsername(data.username);
+      setLoading(false);
+      setMeetups(data.data);
+    }
   };
-
-  useEffect(() => {
-    fetchMeetups();
-  }, []);
-
   meetups.forEach((meetup) => {
     if (dayjs(meetup.time).isBefore(dayjs())) {
       pastMeetups.push(meetup);
@@ -43,6 +43,11 @@ export const UserProfile = () => {
       futureMeetups.push(meetup);
     }
   });
+
+  useEffect(() => {
+    fetchMeetups();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <PageLayout>
@@ -56,11 +61,9 @@ export const UserProfile = () => {
             <ul>
               {futureMeetups.map((meetup, i) => (
                 <li key={i}>
-                  <div className='collapse bg-base-200 mt-3 text-center'>
+                  <div className='collapse w-96 bg-base-200 mt-3 text-center'>
                     <input type='radio' name={`meetup`} />
-                    <div className='collapse-title text-xl font-medium p-0 pt-4'>
-                      {meetup.title}
-                    </div>
+                    <div className='collapse-title font-medium p-0 pt-4'>{meetup.title}</div>
                     <div className='collapse-content'>
                       <p>{meetup.description}</p>
                       <p>{meetup.time}</p>
@@ -78,11 +81,12 @@ export const UserProfile = () => {
           )}
           <h2 className='pt-10 text-2xl'>Past Meetups</h2>
           {loading && <LoadingSpinner />}
+          {pastMeetups.length === 0 && <p>No past meetups.</p>}
           {pastMeetups.length > 0 && (
             <ul>
               {pastMeetups.map((meetup, i) => (
                 <li key={i}>
-                  <div className='collapse bg-base-200 mt-3 text-center '>
+                  <div className='collapse w-96 bg-base-200 mt-3 text-center '>
                     <input type='radio' name={`meetup`} />
                     <div className='collapse-title text-xl font-medium p-0 pt-4'>
                       {meetup.title}
