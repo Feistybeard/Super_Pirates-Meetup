@@ -13,7 +13,9 @@ export async function submitToApi(data, method, link) {
 
     if (link == 'user/login') {
       console.log('token', result.token);
-      localStorage.setItem('token', result.token);
+      if (result.token) {
+        localStorage.setItem('token', result.token);
+      }
     }
 
     return result;
