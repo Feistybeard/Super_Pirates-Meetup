@@ -1,14 +1,18 @@
 service: meetup-serverless
-frameworkVersion: "3"
+frameworkVersion: '3'
 
 provider:
   name: aws
   runtime: nodejs18.x
   profile: default
   region: eu-north-1
+  httpApi:
+    cors: true
   iam:
     role: ${env:AWS_ROLE}
   deploymentMethod: direct
+  environment:
+    JWT_SECRET: ${env:JWT_SECRET}
 
 plugins:
   - serverless-webpack
@@ -23,8 +27,57 @@ functions:
     handler: functions/createUser/index.handler
     events:
       - httpApi:
-          path: /api/user
+          path: /api/user/signup
           method: POST
+  loginUser:
+    handler: functions/loginUser/index.handler
+    events:
+      - httpApi:
+          path: /api/user/login
+          method: POST
+  createMeetup:
+    handler: functions/createMeetup/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups
+          method: POST
+  getMeetup:
+    handler: functions/getMeetup/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups/{meetupId}
+          method: GET
+  userProfile:
+    handler: functions/userProfile/index.handler
+    events:
+      - httpApi:
+          path: /api/user/profile
+          method: GET
+  addReview:
+    handler: functions/addReview/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups/reviews/{meetupId}
+          method: POST
+  attendMeetup:
+    handler: functions/attendMeetup/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups/attend/{meetupId}
+          method: POST
+  getMeetups:
+    handler: functions/getMeetups/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups
+          method: GET
+  unregisterFromMeetup:
+    handler: functions/unregisterFromMeetup/index.handler
+    events:
+      - httpApi:
+          path: /api/meetups/{meetupId}
+          method: DELETE
+
 resources:
   Resources:
     MeetupTable:

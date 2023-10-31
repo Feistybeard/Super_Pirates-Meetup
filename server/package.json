@@ -1,5 +1,15 @@
 {
 	"devDependencies": {
 		"serverless-webpack": "^5.13.0"
+	},
+	"dependencies": {
+		"@middy/core": "^4.6.5",
+		"@middy/http-json-body-parser": "^4.6.5",
+		"aws-sdk": "^2.1478.0",
+		"bcryptjs": "^2.4.3",
+		"dayjs": "^1.11.10",
+		"joi": "^17.11.0",
+		"jsonwebtoken": "^9.0.2",
+		"nanoid": "^5.0.2"
 	}
 }
