@@ -1,12 +1,15 @@
 export async function submitToApi(data, method, link) {
   try {
-    const response = await fetch(import.meta.env.VITE_BASE_URL + link, {
-      method: method,
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/${link}`,
+      {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    });
+    );
 
     const result = await response.json();
     console.log('RESULT:', result);

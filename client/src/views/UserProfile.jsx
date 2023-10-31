@@ -20,7 +20,7 @@ export const UserProfile = () => {
     if (tokenExpired) {
       navigate(`${baseLink}/login`);
     } else {
-      const url = import.meta.env.VITE_BASE_URL + 'user/profile';
+      const url = `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/user/profile`;
       const token = localStorage.getItem('token');
       const response = await fetch(url, {
         method: 'GET',

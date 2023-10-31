@@ -29,8 +29,8 @@ function MeetupCardLayout({
       setNoticeText('Please log in to join meetups!');
     } else {
       const token = localStorage.getItem('token');
-      const meetupUrl = `${import.meta.env.VITE_BASE_URL}meetups/${meetupId}`;
-      const userUrl = `${import.meta.env.VITE_BASE_URL}user/profile`;
+      const meetupUrl = `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/meetups/${meetupId}`;
+      const userUrl = `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/user/profile`;
 
       try {
         const [meetupResponse, userResponse] = await Promise.all([
@@ -95,7 +95,7 @@ function MeetupCardLayout({
     const token = localStorage.getItem('token');
     try {
       if (btnText === 'leave meetup') {
-        const url = `${import.meta.env.VITE_BASE_URL}meetups/${meetupId}`;
+        const url = `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/meetups/${meetupId}`;
         const response = await fetch(url, {
           method: 'DELETE',
           headers: {
@@ -110,7 +110,7 @@ function MeetupCardLayout({
           setNoticeText('Successfully left meetup!');
         }
       } else {
-        const url = `${import.meta.env.VITE_BASE_URL}meetups/attend/${meetupId}`;
+        const url = `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/meetups/attend/${meetupId}`;
         const response = await fetch(url, {
           method: 'POST',
           headers: {

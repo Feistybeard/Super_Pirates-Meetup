@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { baseLink } from '../../utils/helpers';
@@ -13,7 +13,7 @@ export const UserForm = ({ heading, buttonText }) => {
 
   const timer = 3000;
 
-  const userToken = localStorage.getItem('token');
+  // const userToken = localStorage.getItem('token');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,7 +44,7 @@ export const UserForm = ({ heading, buttonText }) => {
       setNotification(message + ' successful!');
       setTimeout(() => {
         navigate(redirect);
-        window.location.reload();
+        // window.location.reload();
       }, timer);
     } else {
       console.log(message + ' failed');

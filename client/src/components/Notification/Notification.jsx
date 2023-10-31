@@ -12,6 +12,7 @@ export default function Notification({ message, onExit, timer = 3000 }) {
         onExit();
       }, timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message]);
 
   if (visible) {

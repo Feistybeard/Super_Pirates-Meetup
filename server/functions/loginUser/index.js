@@ -9,7 +9,7 @@ async function login(event) {
 
   try {
     const result = await checkUsername(username);
-    console.log(result);
+    // console.log(result);
     const usersFound = result.Count;
 
     if (usersFound === 0) {
@@ -28,7 +28,7 @@ async function login(event) {
       expiresIn: 3600,
     });
 
-    console.log(token);
+    // console.log(token);
     return sendResponse(200, {
       success: true,
       message: `User ${username} successfully logged in!`,

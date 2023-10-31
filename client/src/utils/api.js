@@ -1,11 +1,14 @@
 export async function getMeetups() {
   try {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}meetups`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/meetups`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const result = await response.json();
@@ -18,12 +21,15 @@ export async function getMeetups() {
 
 export async function getMeetup(id) {
   try {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}meetups/${id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/meetups/${id}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (response.ok) {
       const result = await response.json();
@@ -38,14 +44,17 @@ export async function submitReview(data, meetupId) {
   const token = localStorage.getItem('token');
 
   try {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}meetups/reviews/${meetupId}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/meetups/reviews/${meetupId}`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    });
+    );
 
     const result = await response.json();
     return result;
@@ -56,7 +65,7 @@ export async function submitReview(data, meetupId) {
 
 export async function getUserInfo() {
   const token = localStorage.getItem('token');
-  const url = import.meta.env.VITE_BASE_URL + 'user/profile';
+  const url = `https://rh0ztvnh0m.execute-api.eu-north-1.amazonaws.com/api/user/profile`;
 
   try {
     const response = await fetch(url, {
