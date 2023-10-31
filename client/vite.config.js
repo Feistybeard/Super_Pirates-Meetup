@@ -4,8 +4,9 @@ import jsconfigPaths from 'vite-jsconfig-paths';
 import path from 'path';
 
 export default ({ mode }) => {
-  const isProduction = mode === 'production';
-  const base = isProduction ? './' : '/Super_Pirates-Meetup/';
+  // const isProduction = mode === 'production';
+  // const base = isProduction ? './' : './';
+  const base = './';
 
   return defineConfig({
     plugins: [react()],
