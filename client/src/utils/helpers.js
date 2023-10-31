@@ -1,6 +1,6 @@
 import { jwtDecode } from 'jwt-decode';
 // base link from vite.config.js
-export const baseLink = '';
+export const baseLink = '/Super_Pirates-Meetup';
 
 export const siteLinks = [
   { title: 'Home', url: `${baseLink}/` },
