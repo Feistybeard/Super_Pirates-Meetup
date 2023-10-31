@@ -6,22 +6,32 @@ import { PageLayout } from '../components/PageLayout/PageLayout';
 import { Link } from 'react-router-dom';
 import MeetupIcon from '../components/MeetupIcon/MeetupIcon';
 import { IoMdArrowBack } from 'react-icons/io';
+import dayjs from 'dayjs';
 
 function MeetupList() {
   const [meetups, setMeetups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchResult, setSearchResult] = useState([]);
-  const [search, setSearch] = useState('');
+  const [formData, setFormData] = useState({ query: '', startDate: '', endDate: '' });
 
   function getMeetupsByQuery(queryStr) {
     const words = queryStr.toLowerCase().split(' ');
 
-    const findMatch = meetups.filter((meetup) => {
+    const meetupsByDate = meetups.filter((meetup) => {
+      if (
+        dayjs(meetup.time).isAfter(formData.startDate || '1900-01-01') &&
+        dayjs(meetup.time).isBefore(`${formData.endDate || '9999-12-31'} 23:59:59`)
+      ) {
+        return meetup;
+      }
+    });
+
+    const findMatch = meetupsByDate.filter((meetup) => {
       const keywords = meetup.keywords.map((keyword) => keyword.toLowerCase());
 
       for (const word of words) {
         for (const key of keywords) {
-          if (key.includes(word)) {
+          if (key.includes(word) || meetup.location.toLowerCase().includes(word)) {
             return meetup;
           }
         }
@@ -42,13 +52,13 @@ function MeetupList() {
   }, []);
 
   function handleOnChange(e) {
-    setSearch(e.target.value);
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  async function handleClick() {
-    const query = getMeetupsByQuery(search);
+  async function handleClick(event) {
+    event.preventDefault();
+    const query = getMeetupsByQuery(formData.query);
     setSearchResult(query);
-    setSearch('');
   }
 
   if (isLoading)
@@ -68,12 +78,7 @@ function MeetupList() {
   return (
     <PageLayout>
       <div className='flex flex-col gap-5 justify-center items-center mt-20'>
-        <SearchInput
-          disabled={search === '' || search.length < 2}
-          onChange={handleOnChange}
-          value={search}
-          onClick={handleClick}
-        />
+        <SearchInput onChange={handleOnChange} value={formData} onClick={handleClick} />
 
         {!searchResult.length ? (
           <div className='flex flex-col items-center gap-3'>
