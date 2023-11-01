@@ -20,6 +20,7 @@ function MeetupCardLayout({
   const [btnText, setBtnText] = useState();
   const [noticeText, setNoticeText] = useState('');
   const meetupId = useParams().id;
+  const [attendeesInfo, setAttendeesInfo] = useState();
 
   async function checkIfSignedUp() {
     const tokenExpired = isTokenExpired();
@@ -63,14 +64,17 @@ function MeetupCardLayout({
           if (usersAttending.includes(user)) {
             setBtnActive(true);
             setBtnText('leave meetup');
+            setAttendeesInfo(meetup.attendees);
           } else {
             setBtnActive(true);
             setBtnText('join meetup');
+            setAttendeesInfo(meetup.attendees);
           }
 
           if (meetup.spotsAvailable === 0 && !usersAttending.includes(user)) {
             setBtnActive(false);
             setBtnText('meetup is full');
+            setAttendeesInfo(meetup.attendees);
           }
 
           const date = new Date(meetup.time);
@@ -78,6 +82,7 @@ function MeetupCardLayout({
           if (date < now) {
             setBtnActive(false);
             setBtnText('meetup has ended');
+            setAttendeesInfo(meetup.attendees);
           }
         }
       } catch (error) {
@@ -146,7 +151,7 @@ function MeetupCardLayout({
         time={time}
         host={host}
         location={location}
-        attendees={attendees}
+        attendees={attendeesInfo}
         limit={limit}
         description={description}
         keywords={keywords}

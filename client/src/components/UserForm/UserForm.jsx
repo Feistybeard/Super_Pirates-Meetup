@@ -38,7 +38,7 @@ export const UserForm = ({ heading, buttonText }) => {
     const response = await submitToApi(data, method, link);
 
     if (response.success == true) {
-      console.log(message + ' successful');
+      // console.log(message + ' successful');
       setUsername('');
       setPassword('');
       setNotification(message + ' successful!');
